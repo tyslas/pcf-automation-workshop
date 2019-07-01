@@ -1,0 +1,39 @@
+resource_types:
+- name: pivnet
+  type: docker-image
+  source:
+    repository: pivotalcf/pivnet-resource
+    tag: latest-final
+resources:
+- name: platform-automation
+  type: pivnet
+  source:
+    api_token: ((pivnet-token))
+    product_slug: platform-automation
+    product_version: 3.0.1
+jobs:
+  - name: test  
+    plan:
+      - aggregate:
+        - get: platform-automation-image
+          resource: platform-automation
+          params:
+            globs: ["platform-automation-image*.tgz"]
+            unpack: true
+        - get: platform-automation-tasks
+          resource: platform-automation
+          params:
+            globs: ["platform-automation-tasks*.zip"]
+            unpack: true         
+      - task: test
+        image: platform-automation-image
+        config:
+          platform: linux
+          inputs:
+          - name: platform-automation-tasks
+          run:
+            path: bash
+            args:
+            - "-c"
+            - |
+              exit 1;
