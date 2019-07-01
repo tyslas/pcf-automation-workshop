@@ -16,9 +16,10 @@ resources:
 - name: configuration
   type: git
   source:
-    private_key: ((configuration.private_key))
-    uri: ((configuration.uri))
-    branch: ((configuration.branch))   
+    private_key: ((configuration_private_key))
+    uri: ((configuration_uri))
+    branch: ((configuration_branch))
+    
 
 interpolate-creds: &interpolate-creds
   image: platform-automation-image
