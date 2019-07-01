@@ -30,7 +30,7 @@ interpolate-creds: &interpolate-creds
     CREDHUB_SERVER: ((credhub-server))
     CREDHUB_CA_CERT: ((credhub-ca-cert))
     PREFIX: '/pipeline/lab08'
-    INTERPOLATION_PATHS: ((labs-dir))/product-configs/versions ((labs-dir))/product-configs/templates ((labs-dir))/product-configs/secrets ((labs-dir))/product-configs/vars
+    INTERPOLATION_PATHS: ((labs-dir))/product-configs/versions
     SKIP_MISSING: true
   input_mapping:
     files: configuration
@@ -61,7 +61,7 @@ jobs:
         params:
           CONFIG_FILE: ((labs-dir))/product-configs/versions/opsman.yml
         input_mapping:
-          config: product-configs
+          config: interpolated-creds
         output_mapping:
           downloaded-product: opsman-image
       
