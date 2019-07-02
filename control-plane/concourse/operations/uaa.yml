@@ -1,0 +1,123 @@
+---
+- type: replace
+  path: /instance_groups/name=web/jobs/-
+  value:
+    name: uaa
+    properties:
+      encryption:
+        active_key_label: KEY-1
+        encryption_keys:
+        - label: KEY-1
+          passphrase: ((encryption-keys-passphrase))
+      login:
+        saml:
+          serviceProviderCertificate: ((atc_tls.certificate))
+          serviceProviderKey: ((atc_tls.private_key))
+          serviceProviderKeyPassword: ""
+      uaa:
+        localhost_http_port: 8081
+        port: 8081
+        logging_level: INFO
+        admin:
+          client_secret: ((uaa-admin))
+        jwt:
+          policy:
+            active_key_id: key-1
+            keys:
+              key-1:
+                signingKey: ((uaa-jwt.private_key))
+          revocable: true
+        login:
+          client_secret: ((uaa-login))
+        scim:
+          users:
+          - groups:
+            - scim.write
+            - scim.read
+            - bosh.admin
+            name: admin
+            password: ((uaa-users-admin))
+        sslCertificate: ((atc_tls.certificate))
+        sslPrivateKey: ((atc_tls.private_key))
+        url: https://((concourse_host_name)):8443
+        zones:
+          internal:
+            hostnames: []
+      uaadb:
+        databases:
+        - name: uaa
+          tag: uaa
+        db_scheme: postgresql
+        port: 5432
+        tls: disabled
+        roles:
+        - name: uaa
+          password: ((uaa-db-password))
+          tag: admin
+    release: uaa
+
+- type: replace
+  path: /instance_groups/name=db/jobs/name=postgres/properties/databases/databases/-
+  value:
+    name: uaa
+
+- type: replace
+  path: /instance_groups/name=db/jobs/name=postgres/properties/databases/roles/-
+  value:
+    name: uaa
+    password: ((uaa-db-password))
+
+- type: replace
+  path: /releases/-
+  value:
+    name: uaa
+    sha1: ((uaa_sha1))
+    url: https://bosh.io/d/github.com/cloudfoundry/uaa-release?v=((uaa_version))
+    version: ((uaa_version))
+
+- type: replace
+  path: /variables/-
+  value:
+    name: uaa-users-admin
+    type: password
+- type: replace
+  path: /variables/-
+  value:
+    name: uaa-admin
+    type: password
+- type: replace
+  path: /variables/-
+  value:
+    name: uaa-login
+    type: password
+- type: replace
+  path: /variables/-
+  value:
+    name: uaa-credhub-admin
+    type: password
+- type: replace
+  path: /variables/-
+  value:
+    name: uaa-db-admin
+    type: password
+- type: replace
+  path: /variables/-
+  value:
+    name: uaa-db-password
+    type: password
+- type: replace
+  path: /variables/-
+  value:
+    name: encryption-keys-passphrase
+    options:
+      length: 40
+    type: password
+
+- type: replace
+  path: /variables/-
+  value:
+    name: uaa-jwt
+    options:
+      key_length: 4096
+    type: rsa
+

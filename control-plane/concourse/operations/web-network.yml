@@ -1,0 +1,6 @@
+- type: replace
+  path: /instance_groups/name=web/networks
+  value: 
+  - name: ((web_network_name_AZ1))
+    default: [dns, gateway]
+#    static_ips: [((web_static_ip))]
