@@ -78,14 +78,14 @@ jobs:
         input_mapping:
           image: opsman-image
           state: configuration
-          config: interpolated-creds
-          vars: variable
+          config: variable
+          secrets: interpolated-creds
         params:
           VARS_FILES: |
-            vars/((labs-dir))/product-configs/vars/opsman.yml
-            vars/((labs-dir))/product-configs/secrets/opsman.yml
+            config/((labs-dir))/product-configs/vars/opsman.yml
+            secrets/((labs-dir))/product-configs/secrets/opsman.yml
           STATE_FILE: ((labs-dir))/state/state.yml
-          OPSMAN_CONFIG_FILE: vars/((labs-dir))/product-configs/templates/opsman.yml
+          OPSMAN_CONFIG_FILE: ((labs-dir))/product-configs/templates/opsman.yml
         ensure: &make-state-commit
           do:
             - task: make-commit

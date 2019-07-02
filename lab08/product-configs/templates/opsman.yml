@@ -6,6 +6,7 @@ opsman-configuration:
       username: ((vcenter_user))
       password: ((vcenter_password))
       datastore: ((vcenter_datastore))
+      insecure: ((vcenter_insecure))
       host: ((vcenter_opsman_host))               # vCenter host to deploy Ops Manager on
       datacenter: ((vcenter_datacenter))
       resource_pool: ((vcenter_resource_pool))

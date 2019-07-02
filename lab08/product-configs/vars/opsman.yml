@@ -1,6 +1,7 @@
 vcenter_datacenter: Lab08-Datacenter01
 vcenter_datastore: nfs-lab08-vol1
 vcenter_opsman_host: ecsdenlab08esxi01.lab.ecsteam.local
+vcenter_insecure: 1
 vcenter_resource_pool: /Lab08-Datacenter01/host/Lab08-Cluster01/Resources/pcfPool
 vcenter_folder: pcf_vms
 opsman_private_ip: 172.28.81.5
