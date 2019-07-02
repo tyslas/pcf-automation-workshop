@@ -81,7 +81,9 @@ jobs:
           config: interpolated-creds
           vars: variable
         params:
-          VARS_FILES: vars/((labs-dir))/product-configs/vars/opsman.yml
+          VARS_FILES: |
+            vars/((labs-dir))/product-configs/vars/opsman.yml
+            vars/((labs-dir))/product-configs/secrets/opsman.yml
           STATE_FILE: ((labs-dir))/state/state.yml
           OPSMAN_CONFIG_FILE: ((labs-dir))/product-configs/templates/opsman.yml
         ensure: &make-state-commit
