@@ -36,7 +36,7 @@ interpolate-creds: &interpolate-creds
     CREDHUB_SERVER: ((credhub-server))
     CREDHUB_CA_CERT: ((credhub-ca-cert))
     PREFIX: '/pipeline/lab08'
-    INTERPOLATION_PATHS: ((labs-dir))/product-configs/versions ((labs-dir))/product-configs/secrets ((labs-dir))
+    INTERPOLATION_PATHS: ((labs-dir))/product-configs/versions ((labs-dir))/product-configs/secrets ((labs-dir))/auth
     SKIP_MISSING: true
   input_mapping:
     files: variable
@@ -114,5 +114,7 @@ jobs:
           env: configuration
           config: interpolated-creds
         params:
-          ENV_FILE: ((labs-dir))/env.yml
-          AUTH_CONFIG_FILE: ((labs-dir))/auth.yml      
+          ENV_FILE: ((labs-dir))/auth/env.yml
+          AUTH_CONFIG_FILE: ((labs-dir))/auth/auth.yml
+
+        
