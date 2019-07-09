@@ -1,4 +1,4 @@
 *credhub*.yml
 atc_certs
 concourse-vars.yml
-
+ci/gitCredentials.yml
