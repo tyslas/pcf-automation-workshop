@@ -19,7 +19,7 @@ resources:
     private_key: ((configuration_private_key))
     uri: ((configuration_uri))
     branch: ((configuration_branch))
-
+    
 - name: variable
   type: git
   source:
@@ -41,7 +41,7 @@ interpolate-creds: &interpolate-creds
   input_mapping:
     files: variable
   output_mapping:
-    interpolated-files: interpolated-creds
+    interpolated-files: interpolated-creds    
 jobs:
   - name: install-opsman
     serial: true
@@ -105,7 +105,7 @@ jobs:
             - put: configuration
               params:
                 repository: configuration-commit
-                merge: true
+                merge: true          
       - task: configure-authentication
         image: platform-automation-image
         file: platform-automation-tasks/tasks/configure-authentication.yml
@@ -116,7 +116,8 @@ jobs:
         params:
           ENV_FILE: ((labs-dir))/auth/env.yml
           AUTH_CONFIG_FILE: ((labs-dir))/auth/auth.yml
-      - task: configure-director
+          
+    - task: configure-director
         image: platform-automation-image
         file: platform-automation-tasks/tasks/configure-director.yml
         input_mapping:
@@ -126,4 +127,4 @@ jobs:
         params:
           VARS_FILES: vars/((foundation))/vars/director-vars.yml
           ENV_FILE: ((labs-dir))/env.yml
-          DIRECTOR_CONFIG_FILE: ((labs-dir))/config/director.yml
+          DIRECTOR_CONFIG_FILE: ((labs-dir))/config/director.yml           
