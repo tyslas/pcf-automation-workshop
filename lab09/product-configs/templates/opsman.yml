@@ -1,0 +1,23 @@
+---
+opsman-configuration:
+  vsphere:
+    vcenter:
+      url: ((vcenter_host))
+      username: ((vcenter_user))
+      password: ((vcenter_password))
+      datastore: ((vcenter_datastore))
+      insecure: ((vcenter_insecure))
+      host: ((vcenter_opsman_host))               # vCenter host to deploy Ops Manager on
+      datacenter: ((vcenter_datacenter))
+      resource_pool: ((vcenter_resource_pool))
+      folder: ((vcenter_folder))
+    disk_type: thin
+    private_ip: ((opsman_private_ip))
+    dns: ((dns))
+    ntp: ((ntp))
+    ssh_public_key: ((opsman_ssh_public_key))
+    hostname: ((opsman_host_name))
+    network: ((opsman_network))           # vcenter network to deploy to
+    netmask: ((opsman_netmask))
+    gateway: ((opsman_network_gw))
+    vm_name: ((opsman_vm_name))
