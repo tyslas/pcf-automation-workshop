@@ -70,6 +70,7 @@ jobs:
         - get: configuration
         - get: ops-manager-image
           resource: ops-manager
+          params:
             globs: ["*.ova"]
       - task: interpolate-download-opsman-image-creds
         <<: *interpolate-creds
