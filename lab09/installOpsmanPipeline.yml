@@ -12,6 +12,14 @@ resources:
     product_slug: platform-automation
     product_version: ((platform-automation-version))
 
+- name: ops-manager 
+  type: pivnet
+  source:
+    api_token: ((pivnet-api-token))
+    product_slug: ops-manager
+    product_version: ((ops-manager-version))
+    sorty_by: semver
+
    # configurations
 - name: configuration
   type: git
@@ -26,13 +34,6 @@ resources:
     private_key: ((configuration_private_key))
     uri: ((configuration_uri))
     branch: ((configuration_branch))
-
-- name: 
-  type: ops-manager
-  source: pivnet
-    api_token: ((pivnet-api-token))
-    product_slug: ops-manager
-    product_version: ((ops-manager-version))
 
 interpolate-creds: &interpolate-creds
   image: platform-automation-image
@@ -67,6 +68,9 @@ jobs:
             unpack: true
         - get: variable
         - get: configuration
+        - get: ops-manager-image
+          resource: ops-manager
+            globs: ["*.ova"]
       - task: interpolate-download-opsman-image-creds
         <<: *interpolate-creds
       - task: download-opsman-image
