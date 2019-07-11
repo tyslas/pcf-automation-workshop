@@ -4,12 +4,12 @@ vcenter_opsman_host: ecsdenlab09esxi01.lab.ecsteam.local
 vcenter_insecure: 1
 vcenter_resource_pool: /Lab09-Datacenter01/host/Lab09-Cluster01/Resources/controlPlanePool
 vcenter_folder: pcf_vms
-opsman_private_ip: 172.28.91.5
+opsman_private_ip: 172.28.91.6
 dns: 172.29.0.5
 ntp: ntp.lab.ecsteam.local
 opsman_host_name: opsman.lab09.ecsteam.io
 opsman_network: Lab09-NetA
 opsman_netmask: 255.255.255.0
 opsman_network_gw: 172.28.91.1
-opsman_vm_name: lab09_opsman
+opsman_vm_name: lab09_opsman_controlplane
 

@@ -74,21 +74,11 @@ jobs:
             globs: ["*.ova"]
       - task: interpolate-download-opsman-image-creds
         <<: *interpolate-creds
-      - task: download-opsman-image
-        image: platform-automation-image
-        file: platform-automation-tasks/tasks/download-product.yml
-        params:
-          CONFIG_FILE: ((labs-dir))/product-configs/versions/opsman.yml
-        input_mapping:
-          config: interpolated-creds
-        output_mapping:
-          downloaded-product: opsman-image
-
       - task: create-vm
         image: platform-automation-image
         file: platform-automation-tasks/tasks/create-vm.yml
         input_mapping:
-          image: opsman-image
+          image: ops-manager
           state: configuration
           config: variable
           secrets: interpolated-creds
